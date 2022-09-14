@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p" xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd
+">
+
+	<!-- setter injection-> using property tag,p schema,same we can do for construc using c schema
+	
+	-> autowiring we can using byName(user getter injection) = checks for name of bean in xml,if not found error,checks for type of bean 
+	in xml if two bean have same type spring ioc get confused which one to inject,(constructor injection)by constructor checks
+	by name(we can it we bean is created using constructor injection)
+	
+	-->
+
+	<bean class="com.spring.jdbc.Springjdbc.Certi" name="certi">
+		<constructor-arg value="Java Full Stack"></constructor-arg>
+	</bean>
+
+
+	<bean class="com.spring.jdbc.Springjdbc.Student" name="student1" p:studentAddress="Kangra" autowire="constructor">
+
+		<property name="studentId">
+			<value>23523</value>
+		</property>
+		<property name="studentName">
+			<value>Vinay Kumar</value>
+		</property>
+
+		<!--adding list types values-->
+		<property name="studentMarks">
+			<list>
+				<value>78</value>
+				<value>99</value>
+				<value>97</value>
+				<value>23</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<!--constructor injection-->
+	<bean class="com.spring.jdbc.Springjdbc.Student" name="student2" autowire="constructor">
+
+
+		<!--using index we can specify which value willgo at which index in constructor
+we can resolve ambuigty problem ,const arg take value asstring if don't ' found a conswith string it calls first constructor
+with defined args,hence to avoid this we can pass value type-->
+
+		<constructor-arg value="35235" type="int"></constructor-arg>
+		<constructor-arg value="Naruto Uzumaki"></constructor-arg>
+		<constructor-arg value="Konoha"></constructor-arg>
+		<constructor-arg>
+			<list>
+				<value>35</value>
+				<value>52</value>
+			</list>
+		</constructor-arg>
+
+		<!--reference type injection ,created bean of reference above-->
+
+		<!--<constructor-arg ref="certi"></constructor-arg>-->
+	</bean>
+
+
+</beans>
